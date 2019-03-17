@@ -46,6 +46,9 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "ILI9341_STM32_Driver.h"
+#include "ILI9341_GFX.h"
+#include "snow_tiger.h"
+#include "zdj.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -66,7 +69,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+	int testowe_zmienne;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -87,13 +90,14 @@ void SystemClock_Config(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-
+//uint8_t * ptr_snowTiger = &snow_tiger[0];
+// uint8_t * ptr_showZdj = &show_zdj[0];
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-  HAL_Init();
+   HAL_Init();
 
   /* USER CODE BEGIN Init */
 
@@ -111,16 +115,18 @@ int main(void)
   MX_SPI1_Init();
   /* USER CODE BEGIN 2 */
   ILI9341_Init();
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  ILI9341_Fill_Screen(RED);
-	  ILI9341_Fill_Screen(YELLOW);
     /* USER CODE END WHILE */
-
+	  ILI9341_Draw_Image(&snow_tiger,SCREEN_VERTICAL_2);
+	  HAL_Delay(1000);
+	  ILI9341_Draw_Image(&show_zdj[0],SCREEN_HORIZONTAL_1);
+	  HAL_Delay(1000);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
